@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeLite_Workspace Name="DailyProgramming" Database="">
+  <Project Name="249" Path="249/249.project" Active="No"/>
+  <Project Name="242" Path="242/242.project" Active="No"/>
+  <Project Name="242i" Path="242i/242i.project" Active="No"/>
+  <Project Name="247" Path="247/247.project" Active="Yes"/>
+  <BuildMatrix>
+    <WorkspaceConfiguration Name="Debug" Selected="yes">
+      <Project Name="249" ConfigName="Debug"/>
+      <Project Name="242" ConfigName="Debug"/>
+      <Project Name="242i" ConfigName="Debug"/>
+      <Project Name="247" ConfigName="Debug"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release" Selected="yes">
+      <Project Name="249" ConfigName="Release"/>
+      <Project Name="242" ConfigName="Release"/>
+      <Project Name="242i" ConfigName="Release"/>
+      <Project Name="247" ConfigName="Release"/>
+    </WorkspaceConfiguration>
+  </BuildMatrix>
+</CodeLite_Workspace>
