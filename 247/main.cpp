@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include <fstream>
 #include <string>
 #include <time.h>
@@ -20,81 +21,116 @@ int main()
 {
 	vector<Person> GiftGivers;
     vector<Person> Matched;
+    bool noMatches = true;
     
     
     ifstream Data;
-    int lineNum = 0;
-    Data.open(data.txt);
+    Data.open("data.txt");
     if(Data.is_open())
     {
         vector<string> TempNames;
-        
+        cout << "Data opened!" << endl;
         string CurrentLine = "";
         // Get all of our recipients and struct our data
         while(getline(Data,CurrentLine))
         {
             // This just puts all our names in a storage container for later sorting
-            split(TempNames,CurrentLine,is_any_of(" ")); // Split the line by spaces
+            boost::split(TempNames,CurrentLine, boost::is_any_of(" ")); // Split the line by spaces
             Person CurrentPerson; // Holder var
-            for(vector<string>::iterator it= TempNames.begin(); it !> TempNames.end(); ++it)
-            {
-                // Struct each person based on name, and add family members
-                CurrentPerson.Name = TempNames[it];
+            // Struct each person based on name, and add family members
+
                 
-                // Add each family member making sure not to add self.
-                for(vector<string>::iterator xt= TempNames.begin(); xt !> TempNames.end(); ++xt)
+            // Add each family member making sure not to add self.
+            for(vector<string>::iterator xt= TempNames.begin(); xt < TempNames.end(); ++xt)
+            {
+                int index = xt - TempNames.begin();
+                CurrentPerson.Name = TempNames[index];
+                if (*xt != CurrentPerson.Name && *xt != "")
                 {
-                    if (TempNames[xt] != CurrentPerson.Name)
-                    {
                         // Add it to their family
-                        CurrentPerson.FamilyMembers.push_back(TempNames[xt]);
-                    }
+                        CurrentPerson.FamilyMembers.push_back(*xt);
                 }
-                // Add to available recipients
                 GiftGivers.push_back(CurrentPerson);
             }
-        }
-        
+                // Add to available recipients
 
+        }
+    }
+    else
+    {
+        cout << "Data did not open :(";
+        return 0;
+    }
+    
+    Data.close();
+    
+    for(vector<Person>::iterator it = GiftGivers.begin(); it < GiftGivers.end(); ++it)
+    {
+        int index = it - GiftGivers.begin();
+        cout << GiftGivers[index].Name <<  endl;
     }
     
     // We should have all of our data constructed now
     
     // Now get our matches
-    
-    for(vector<Person>::iterator it = GiftGivers.begin(); it != GiftGivers.end(); ++it)
+
+    srand(time(NULL));
+    for(vector<Person>::iterator it = GiftGivers.begin(); it < GiftGivers.end(); ++it)
     {
         // Iterate through from the beginning and lets start matching
-        Person person1;
-        Person person2;
+        Person person1 = *it;
+
         
         // Seed the rand
-        srand(time(NULL));
         
         while(person1.Match == "")
         {
-            int num = rand() % GiftGivers.end() + 1; // Our random number
-            if (find(person1.FamilyMembers.begin(),person1.FamilyMembers.end(),GiftGivers[num].Name) != person1.FamilyMembers.end())
+            int num = rand() % GiftGivers.size() + 1; // Our random number
+            bool family = true;
+            
+            for(vector<string>::iterator xt = person1.FamilyMembers.begin(); xt < person1.FamilyMembers.end(); ++xt)
             {
-                // Family member so don't match
-                // step through the loop
-                next;
+                int index = xt - person1.FamilyMembers.begin();
+                if (person1.FamilyMembers[index] == GiftGivers[num].Name)
+                {
+                    family = true;
+                    continue; // Loop through again
+                    
+                }
+                else
+                {
+                    family = false;
+                    break;
+                }
+            }
+            
+            if (family == false)
+            {
+                 // Got a match, lets make sure someone else doesn't have this person as well
+                if (noMatches)
+                {
+                    person1.Match = GiftGivers[num].Name;
+                    noMatches = false;
+                }
+                else
+                {
+                
+                    for(vector<Person>::iterator xt = Matched.begin(); xt < Matched.end(); ++xt)
+                    {
+                        if(Matched[xt - Matched.begin()].Match == GiftGivers[num].Name) // Theyre already Matched, so we need another
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            person1.Match = GiftGivers[num].Name;
+                        }
+                    } 
+                }
             }
             else
             {
-                // Got a match, lets make sure someone else doesn't have this person as well
-                for(vector<Person>::iterator xt = Matched.begin(); it != Matched.end(); ++xt)
-                {
-                    if(Matched[xt].Match == GiftGivers[num].Name) // Theyre already Matched, so we need another
-                    {
-                        next;
-                    }
-                    else
-                    {
-                        person1.Match = GiftGivers[num].Name;
-                    }
-                } 
-
+               continue;
             }
         }
         
@@ -104,7 +140,8 @@ int main()
             Matched.push_back(person1);
             
             // Make them not available anymore
-            GiftGivers.erase[it]
+            int index = (it - GiftGivers.begin());
+            GiftGivers.erase(GiftGivers.begin() + index);
         }
     }
     
@@ -114,7 +151,9 @@ int main()
     
     for(vector<Person>::iterator it = Matched.begin(); it != Matched.end(); ++it)
     {
-        cout << Matched[it].Name << " <> " << Matched[it].Match;
+        int index = it - Matched.begin();
+        cout << Matched[index].Name << " <> " << Matched[index].Match << endl;
     }
+
 	return 0;
 }

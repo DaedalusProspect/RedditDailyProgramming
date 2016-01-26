@@ -5,15 +5,15 @@
 ## Debug
 ProjectName            :=247
 ConfigurationName      :=Debug
-WorkspacePath          := "E:\Dev\DailyProgramming"
-ProjectPath            := "E:\Dev\DailyProgramming\247"
+WorkspacePath          := "E:\Dev\DailyProgramming\RedditDailyProgramming"
+ProjectPath            := "E:\Dev\DailyProgramming\RedditDailyProgramming\247"
 IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Tech
-Date                   :=21/01/2016
+Date                   :=25/01/2016
 CodeLitePath           :="C:\Program Files\CodeLite"
 LinkerName             :=C:/TDM-GCC-64/bin/g++.exe
 SharedObjectLinkerName :=C:/TDM-GCC-64/bin/g++.exe -shared -fPIC
@@ -38,7 +38,7 @@ MakeDirCommand         :=makedir
 RcCmpOptions           := 
 RcCompilerName         :=C:/TDM-GCC-64/bin/windres.exe
 LinkOptions            :=  
-IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). 
+IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). $(IncludeSwitch)E:/Dev/lib/boost_1_60_0 
 IncludePCH             := 
 RcIncludePath          := 
 Libs                   := 
@@ -94,7 +94,7 @@ PreBuild:
 ## Objects
 ##
 $(IntermediateDirectory)/main.cpp$(ObjectSuffix): main.cpp $(IntermediateDirectory)/main.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "E:/Dev/DailyProgramming/247/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "E:/Dev/DailyProgramming/RedditDailyProgramming/247/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/main.cpp$(DependSuffix): main.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/main.cpp$(DependSuffix) -MM "main.cpp"
 

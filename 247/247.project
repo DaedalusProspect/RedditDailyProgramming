@@ -2,6 +2,9 @@
 <CodeLite_Project Name="247" InternalType="Console">
   <Description/>
   <Dependencies/>
+  <VirtualDirectory Name="src">
+    <File Name="main.cpp"/>
+  </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
       <Compiler Options="" C_Options="" Assembler="">
@@ -15,6 +18,7 @@
     <Configuration Name="Debug" CompilerType="MinGW ( gcc.exe (tdm64-1) 5.1.0 )" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-g;-O0;-Wall" C_Options="-g;-O0;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="."/>
+        <IncludePath Value="E:\Dev\lib\boost_1_60_0"/>
       </Compiler>
       <Linker Options="" Required="yes"/>
       <ResourceCompiler Options="" Required="no"/>
@@ -90,7 +94,4 @@
       </Completion>
     </Configuration>
   </Settings>
-  <VirtualDirectory Name="src">
-    <File Name="main.cpp"/>
-  </VirtualDirectory>
 </CodeLite_Project>
